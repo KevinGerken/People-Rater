@@ -8,7 +8,8 @@ const express = require(`express`),
       flash = require(`connect-flash`),
       methodOverride = require(`method-override`),
       expressSession = require(`express-session`),
-      port = 3000;
+      port = 3000,
+      User = require(`./models/user`);
 
 mongoose.connect(`mongod://localHost:27017/help`);
 
