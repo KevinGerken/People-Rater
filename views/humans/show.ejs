@@ -1,0 +1,30 @@
+<% include ../partials/header %>
+<section>
+  <h1><%=human.firstName%> <%=human.lastName%></h1>
+  <h4><%=human.city%>, <%=human.state%></h4>
+  <h2><%=human.averageStars%></h2>
+  <img src="<%=human.image%>" alt="<%=human.imgAlt%>">
+  <%// for(comment of comments) {%>
+    <hr>
+    <h1><%= //comment.stars %></h1>
+    <img src="<%= //comment.author.image %>" alt="<%=// comment.author.imageAlt%>">
+    <h4><%=//comment.author.username%></h4>
+    <hr>
+    <p>
+      <%= //comment.comment %>
+    </p>
+    <hr>
+  <%//}%>
+  <nav>
+    <a href="/humans">
+      Back
+    </a>
+    <a href="/human/<%=human._id%>/comments/new">
+      Add Review
+    </a>
+    <a href="/humans/<%=human._id%>/edit">
+      Edit
+    </a>
+  </nav>
+</section>
+<% include ../partials/footer %>

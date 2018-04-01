@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+
+<form action="/humans/<%=human._id%>?_method=PUT" method="POST">
+  <input type="text" value="<%=human.firstName%>" name="human[firstName]">
+  <input type="text" value="<%=human.lastName%>" name="human[lastName]">
+  <input type="text" value="<%=human.city%>" name="human[city]">
+  <input type="text" value="<%=human.state%>" name="human[state]">
+  <input type="text" value="<%=human.image%>" name="human[image]">
+  <input type="text" value="<%=human.imageAlt%>" name="human[imageAlt]">
+  <button>Submit</button>
+</form>
+<form action="/humans/<%=human._id%>?_method=DELETE" method="POST">
+  <button>Delete</button>
+</form>
+<% include ../partials/footer %>

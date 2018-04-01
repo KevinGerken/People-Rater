@@ -6,6 +6,7 @@ const humanSchema = new mongoose.Schema({
   city: String,
   state: String,
   image: String,
+  imageAlt: String,
   averageStars: Number
 });
 

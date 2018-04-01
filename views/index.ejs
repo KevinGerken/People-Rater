@@ -1,0 +1,12 @@
+<% include partials/header %>
+<% for(human of humans) { %>
+  <section>
+    <h1><%=human.firstName%> <%=human.lastName%></h1>
+    <h4><%=human.city%>, <%=human.state%></h4>
+    <h2><%=human.averageStars%></h2>
+    <img src="<%=human.image%>" alt="<%=human.imgAlt%>">
+    <a href="/humans/<%=human._id%>/edit">Edit</a>
+  </section>
+<% } %>
+<a href="humans/new">Add Person</a>
+<% include partials/footer %>
