@@ -10,7 +10,8 @@ const express = require(`express`),
       expressSession = require(`express-session`),
       port = 3000,
       User = require(`./models/user`),
-      humansRoute = require(`./routes/humans`);
+      humansRoute = require(`./routes/humans`),
+      usersRoute = require(`./routes/users`);
 
 mongoose.connect(`mongodb://localHost:27017/help`);
 
@@ -37,5 +38,6 @@ app.get(`/`, (req, res) => {
 });
 
 app.use(`/humans`, humansRoute);
+app.use(`/users`, usersRoute);
 
 app.listen(port);

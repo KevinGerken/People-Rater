@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+<% for(user of users) { %>
+  <section>
+    <h1><%=user.firstName%> <%=user.lastName%></h1>
+    <h4><%=user.city%>, <%=user.state%></h4>
+    <h2><%=user.averageStars%></h2>
+    <img src="<%=user.image%>" alt="<%=user.imgAlt%>">
+    <a href="/users/<%=user._id%>/edit">Edit</a>
+  </section>
+<% } %>
+<a href="/users/new">Add User</a>
+<% include ../partials/footer %>

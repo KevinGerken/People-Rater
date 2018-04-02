@@ -1,5 +1,12 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
+<h1><%=user.username%></h1>
+<h4><%=user.firstName%> <%=user.lastName%></h4>
+<h4><%=user.city%>, <%=user.state%></h4>
+<img src="<%=user.image%>" alt="<%=user.imageAlt%>">
 
+<form action="/users/<%=user._id%>?_method=DELETE" method="POST">
+<button>Delete Account dsf</button>
+</form>
 
-<% include partials/footer %>
+<% include ../partials/footer %>
