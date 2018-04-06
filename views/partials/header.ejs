@@ -9,15 +9,21 @@
     <a href="/humans">
       Home
     </a>
-    <a href="/users/login">
-      Login
-    </a>  
-    <a href="/users/new">
-      Signup
-    </a>
-    <a href="/users/logout">
-      Logout
-    </a>
+    <% if(!currentUser) { %>
+      <a href="/login">
+        Login
+      </a>  
+      <a href="/users/new">
+        Signup
+      </a>
+    <% } else { %>
+      <a href="/users/<%= currentUser._id %>">
+          Logged In As: <%= currentUser.username %>
+      </a>
+      <a href="/logout">
+        Logout
+      </a>
+    <% } %>
   </nav>
   <%if(error.length > 0){%>
     <h1><%=error%></h1>

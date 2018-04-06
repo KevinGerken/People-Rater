@@ -26,8 +26,14 @@ app.use(expressSession({
   resave: false,
   saveUninitialized: false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new passportLocal(User.authenticate())); 
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
   res.locals.error = req.flash(`error`);
   res.locals.success = req.flash(`success`);
   next();
@@ -35,6 +41,21 @@ app.use((req, res, next) => {
 
 app.get(`/`, (req, res) => {
   res.render(`splash`);
+});
+
+app.get(`/login`, (req, res) => {
+  res.render(`users/login`);
+});
+
+app.post(`/login`, passport.authenticate(`local`, {
+    successRedirect:`/humans`,
+    failureRedirect: `/users/login`
+  }), (req, res) => { 
+  });
+
+app.get(`/logout`, (req, res) => {
+  req.logout();
+  res.redirect(`/humans`);
 });
 
 app.use(`/humans`, humansRoute);

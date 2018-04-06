@@ -6,8 +6,12 @@
   <input type="text" value="<%=user.city%>" name="user[city]">
   <input type="text" value="<%=user.state%>" name="user[state]">
   <input type="text" value="<%=user.image%>" name="user[image]">
+  <input type="text" value="<%=user.imageAlt%>" name="user[imageAlt]">
   <input type="text" value="<%=user.username%>" name="user[username]">
   <button>Submit</button>
+</form>
+<form action="/users/<%=user._id%>?_method=DELETE" method="POST">
+<button>Delete Account</button>
 </form>
 
 <% include ../partials/footer %>

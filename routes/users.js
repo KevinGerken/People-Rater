@@ -1,6 +1,7 @@
 const express = require(`express`),
       router = express.Router(),
-      User = require(`../models/user`);
+      User = require(`../models/user`),
+      passport = require(`passport`);
 
 router.get(`/`, (req, res) => {
   User.find({}, (err, users) => {
@@ -13,13 +14,14 @@ router.get(`/new`, (req, res) => {
 });
 
 router.post(`/`, (req, res) => {
-  User.create(req.body.user, (err, user) => {
+  User.register(new User(req.body.user),  req.body.password, (err, user) => {
     if(err) {
-      console.log(`fart`);
       errHandler(err, req, res, `back`);
     } else {
-      req.flash(`success`, `Account created successfully.  Hurrah!`);
-      res.redirect(`/humans`);
+      passport.authenticate(`local`)(req, res, () => {
+        req.flash(`success`, `Account created successfully.  Hurrah!`);
+        res.redirect(`/humans`);  
+      });
     }
   });
 });
