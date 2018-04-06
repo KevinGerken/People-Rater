@@ -1,5 +1,13 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
+<form action="/humans/<%=humanId%>/comments/<%=comment._id%>?_method=PUT" method="POST">
+  <input type="number" value="<%=comment.stars%>" name="comment[stars]">
+  <input type="text" value="<%=comment.comment%>" name="comment[comment]">
+  <button>Add Review</button>
+</form>
 
+<form action="/humans/<%=humanId%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+  <button>Delete Comment</button>
+</form>
 
-<% include partials/footer %>
+<% include ../partials/footer %>

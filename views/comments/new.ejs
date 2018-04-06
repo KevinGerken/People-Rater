@@ -1,5 +1,9 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
+<form action="/humans/<%=humanId%>/comments/new" method="POST">
+  <input type="number" placeholder=3 name=comment[stars]>
+  <input type="text" placeholder="Your review here." name=comment[comment]>
+  <button>Add Review</button>
+</form>
 
-
-<% include partials/footer %>
+<% include ../partials/footer %>

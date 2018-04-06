@@ -7,7 +7,13 @@ const humanSchema = new mongoose.Schema({
   state: String,
   image: String,
   imageAlt: String,
-  averageStars: Number
+  averageStars: Number,
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: `Comment`
+    }
+  ]
 });
 
 module.exports = mongoose.model(`Human`, humanSchema);

@@ -1,7 +1,8 @@
 const express = require(`express`),
-      router = express.Router(),
+      router = express.Router({mergeParams: true}),
       User = require(`../models/user`),
-      passport = require(`passport`);
+      passport = require(`passport`),
+      mid = require(`../middleware`);
 
 router.get(`/`, (req, res) => {
   User.find({}, (err, users) => {
@@ -16,7 +17,7 @@ router.get(`/new`, (req, res) => {
 router.post(`/`, (req, res) => {
   User.register(new User(req.body.user),  req.body.password, (err, user) => {
     if(err) {
-      errHandler(err, req, res, `back`);
+      mid.errHandler(err, req, res, `back`);
     } else {
       passport.authenticate(`local`)(req, res, () => {
         req.flash(`success`, `Account created successfully.  Hurrah!`);
@@ -29,7 +30,7 @@ router.post(`/`, (req, res) => {
 router.get(`/:id`, (req, res) => {
   User.findById(req.params.id, (err, user) => {
     if(err) {
-      errHandler(err, req, res, `back`);
+      mid.errHandler(err, req, res, `back`);
     } else {
       res.render(`users/show`, {user: user});
     }
@@ -39,7 +40,7 @@ router.get(`/:id`, (req, res) => {
 router.get(`/:id/edit`, (req, res) => {
   User.findById(req.params.id, (err, user) => {
     if(err) {
-      errHandler(err, req, res, `back`);
+      mid.errHandler(err, req, res, `back`);
     } else {
       res.render(`users/edit`, {user: user});
     }
@@ -49,7 +50,7 @@ router.get(`/:id/edit`, (req, res) => {
 router.put(`/:id`, (req, res) => {
   User.findByIdAndUpdate(req.params.id, req.body.user, (err, user) => {
     if(err) {
-      errHandler(err, req, res, `back`);
+      mid.errHandler(err, req, res, `back`);
     } else {
       req.flash(`success`, `User successfully updated.`);
       res.redirect(`/users/${user._id}`);
@@ -60,7 +61,7 @@ router.put(`/:id`, (req, res) => {
 router.delete(`/:id`, (req, res) => {
   User.findByIdAndRemove(req.params.id, (err) => {
     if(err) {
-      errHandler(err, req, res, `back`);
+      mid.errHandler(err, req, res, `back`);
     } else {
       req.flash(`success`, `Your account has been deleted.`);
       res.redirect(`/humans`);
@@ -68,9 +69,5 @@ router.delete(`/:id`, (req, res) => {
   });
 });
 
-function errHandler(err, req, res, redirect) {
-  req.flash(`error`, err.message);
-  res.redirect(redirect);
-}
 
 module.exports = router;

@@ -6,6 +6,12 @@
     <h2><%=human.averageStars%></h2>
     <img src="<%=human.image%>" alt="<%=human.imgAlt%>">
     <a href="/humans/<%=human._id%>/edit">Edit</a>
+    <a href="/humans/<%=human._id%>/comments/new">
+      Add Comment
+    </a>
+    <a href="/humans/<%=human._id%>">
+      View Human
+    </a>
   </section>
 <% } %>
 <a href="humans/new">Add Person</a>

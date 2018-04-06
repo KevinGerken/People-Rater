@@ -29,7 +29,10 @@ router.post(`/`, (req, res) => {
 });
 
 router.get(`/:id`, (req, res) => {
-  Human.findById(req.params.id, (err, human) => {
+  Human.findById(req.params.id)
+    .populate(`comments`)
+    .exec((err, human) => {
+    console.log(human.comments);
     if(err) {
       req.flash(`err`, `Human not found.`);
       res.redirect(`/humans`);

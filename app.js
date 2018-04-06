@@ -11,7 +11,8 @@ const express = require(`express`),
       port = 3000,
       User = require(`./models/user`),
       humansRoute = require(`./routes/humans`),
-      usersRoute = require(`./routes/users`);
+      usersRoute = require(`./routes/users`),
+      commentsRoute = require(`./routes/comments`);
 
 mongoose.connect(`mongodb://localHost:27017/help`);
 
@@ -60,5 +61,6 @@ app.get(`/logout`, (req, res) => {
 
 app.use(`/humans`, humansRoute);
 app.use(`/users`, usersRoute);
+app.use(`/humans/:id/comments`, commentsRoute);
 
 app.listen(port);
