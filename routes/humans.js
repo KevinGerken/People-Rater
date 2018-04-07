@@ -1,6 +1,7 @@
 const express = require(`express`),
       router = express.Router({mergeParams: true}),
-      Human = require(`../models/human`);
+      Human = require(`../models/human`),
+      mid = require(`../middleware`);
 
 router.get(`/`, (req,res) => {
   Human.find({}, (err, humans) => {
@@ -12,11 +13,11 @@ router.get(`/`, (req,res) => {
   });  
 });
 
-router.get(`/new`, (req, res) => {
+router.get(`/new`, mid.isLoggedIn, (req, res) => {
   res.render(`humans/new`);
 });
 
-router.post(`/`, (req, res) => {
+router.post(`/`, mid.isLoggedIn, (req, res) => {
   Human.create(req.body.human, (err, humans) => {
     if(err) {
       req.flash(`error`, err.message);
@@ -42,7 +43,7 @@ router.get(`/:id`, (req, res) => {
   });
 });
 
-router.get(`/:id/edit`, (req, res) => {
+router.get(`/:id/edit`, mid.checkHumanCreator, (req, res) => {
   Human.findById(req.params.id, (err, human) =>{
     if(err) {
       req.flash(`error`, `Human not found.`);
@@ -53,7 +54,7 @@ router.get(`/:id/edit`, (req, res) => {
   });
 });
 
-router.put(`/:id`, (req, res) => {
+router.put(`/:id`, mid.checkHumanCreator, (req, res) => {
   Human.findByIdAndUpdate(req.params.id, req.body.human, (err, human) => {
     if(err) {
       req.flash(`error`, err.message);
@@ -65,7 +66,7 @@ router.put(`/:id`, (req, res) => {
   });
 });
 
-router.delete(`/:id`, (req, res) => {
+router.delete(`/:id`, mid.checkHumanCreator, (req, res) => {
   Human.findByIdAndRemove(req.params.id, (err) => {
     if(err){
       req.flash(`error`, err.message);

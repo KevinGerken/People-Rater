@@ -5,7 +5,9 @@
     <h4><%=user.city%>, <%=user.state%></h4>
     <h2><%=user.averageStars%></h2>
     <img src="<%=user.image%>" alt="<%=user.imgAlt%>">
-    <a href="/users/<%=user._id%>/edit">Edit</a>
+    <%if(currentUser && user._id.equals(currentUser._id)) {%>
+      <a href="/users/<%=user._id%>/edit">Edit</a>
+    <%}%>
   </section>
 <% } %>
 <a href="/users/new">Add User</a>

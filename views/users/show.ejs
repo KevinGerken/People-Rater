@@ -5,8 +5,10 @@
 <h4><%=user.city%>, <%=user.state%></h4>
 <img src="<%=user.image%>" alt="<%=user.imageAlt%>">
 
-<a href="/users/<%=user._id%>/edit">
-  Edit Account
-</a>
+<%if(currentUser && user._id.equals(currentUser._id)) {%>
+  <a href="/users/<%=user._id%>/edit">
+    Edit Account
+  </a>
+<%}%>
 
 <% include ../partials/footer %>

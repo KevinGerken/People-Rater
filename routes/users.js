@@ -15,8 +15,10 @@ router.get(`/new`, (req, res) => {
 });
 
 router.post(`/`, (req, res) => {
+  req.body.user.username = req.body.username;
   User.register(new User(req.body.user),  req.body.password, (err, user) => {
     if(err) {
+      console.log(err);
       mid.errHandler(err, req, res, `back`);
     } else {
       passport.authenticate(`local`)(req, res, () => {
@@ -37,7 +39,7 @@ router.get(`/:id`, (req, res) => {
   });
 });
 
-router.get(`/:id/edit`, (req, res) => {
+router.get(`/:id/edit`, mid.isUser, (req, res) => {
   User.findById(req.params.id, (err, user) => {
     if(err) {
       mid.errHandler(err, req, res, `back`);
@@ -47,7 +49,7 @@ router.get(`/:id/edit`, (req, res) => {
   });
 });
 
-router.put(`/:id`, (req, res) => {
+router.put(`/:id`, mid.isUser, (req, res) => {
   User.findByIdAndUpdate(req.params.id, req.body.user, (err, user) => {
     if(err) {
       mid.errHandler(err, req, res, `back`);
@@ -58,7 +60,7 @@ router.put(`/:id`, (req, res) => {
   });
 });
 
-router.delete(`/:id`, (req, res) => {
+router.delete(`/:id`, mid.isUser, (req, res) => {
   User.findByIdAndRemove(req.params.id, (err) => {
     if(err) {
       mid.errHandler(err, req, res, `back`);

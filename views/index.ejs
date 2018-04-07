@@ -5,7 +5,11 @@
     <h4><%=human.city%>, <%=human.state%></h4>
     <h2><%=human.averageStars%></h2>
     <img src="<%=human.image%>" alt="<%=human.imgAlt%>">
-    <a href="/humans/<%=human._id%>/edit">Edit</a>
+    <%if(currentUser && human.addedBy.equals(currentUser._id)) {%>
+      <a href="/humans/<%=human._id%>/edit">
+        Edit
+      </a>
+    <%}%>
     <a href="/humans/<%=human._id%>/comments/new">
       Add Comment
     </a>

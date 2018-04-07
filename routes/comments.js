@@ -4,11 +4,11 @@ const express = require(`express`),
       Human = require(`../models/human`),
       mid = require(`../middleware`);
 
-router.get(`/new`, (req, res) => {
+router.get(`/new`, mid.isLoggedIn, (req, res) => {
   res.render(`comments/new`, {humanId: req.params.id});
 });
 
-router.post(`/new`, (req, res) => {
+router.post(`/new`, mid.isLoggedIn, (req, res) => {
   req.body.comment.author = req.user.username;
   Comment.create(req.body.comment, (err, comment) => {
     if(err){
@@ -28,7 +28,7 @@ router.post(`/new`, (req, res) => {
   });
 });
 
-router.get(`/:cid/edit`, (req, res) => {
+router.get(`/:cid/edit`, mid.checkCommentOwner, (req, res) => {
   Comment.findById(req.params.cid, (err, comment) => {
     if(err) {
       errHandler(err, req, res, `back`);
@@ -38,7 +38,7 @@ router.get(`/:cid/edit`, (req, res) => {
   });
 });
 
-router.put(`/:cid`, (req, res) => {
+router.put(`/:cid`, mid.checkCommentOwner, (req, res) => {
   Comment.findByIdAndUpdate(req.params.cid, req.body.comment, (err, comment) => {
     if(err) {
       errHandler(err, req, res, `back`);
@@ -48,7 +48,7 @@ router.put(`/:cid`, (req, res) => {
   });
 });
 
-router.delete(`/:cid`, (req, res) => {
+router.delete(`/:cid`, mid.checkCommentOwner, (req, res) => {
   Comment.findByIdAndRemove(req.params.cid, (err) => {
     if(err){
       errHandler(err, req, res, `back`);

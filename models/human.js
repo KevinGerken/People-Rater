@@ -8,6 +8,12 @@ const humanSchema = new mongoose.Schema({
   image: String,
   imageAlt: String,
   averageStars: Number,
+  addedBy: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: `User`
+    }
+  },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
