@@ -27,7 +27,7 @@
     <a href="/humans/<%=human._id%>/comments/new">
       Add Review
     </a>
-    <% if(currentUser && human.addedBy.equals(currentUser._id)) {%>    
+    <% if(currentUser && human.addedBy.id.equals(currentUser._id)) {%>    
       <a href="/humans/<%=human._id%>/edit">
         Edit
       </a>

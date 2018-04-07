@@ -1,6 +1,7 @@
 const express = require(`express`),
       router = express.Router({mergeParams: true}),
       User = require(`../models/user`),
+      Human = require(`../models/human`)
       passport = require(`passport`),
       mid = require(`../middleware`);
 
@@ -21,10 +22,28 @@ router.post(`/`, (req, res) => {
       console.log(err);
       mid.errHandler(err, req, res, `back`);
     } else {
-      passport.authenticate(`local`)(req, res, () => {
-        req.flash(`success`, `Account created successfully.  Hurrah!`);
-        res.redirect(`/humans`);  
-      });
+      let newHuman = {
+        firstName: req.body.user.firstName,
+        lastName: req.body.user.lastName,
+        city: req.body.user.city,
+        state: req.body.user.state,
+        image: req.body.user.image,
+        imageAlt: req.body.user.imageAlt,
+        addedBy: {
+          id: user._id
+        }
+      }
+      Human.create(newHuman, (err, human) => {
+        if(err) {
+          req.flash(`error`, err.message);
+          res.redirect(`/new`);
+        } else {
+          passport.authenticate(`local`)(req, res, () => {
+            req.flash(`success`, `Account created successfully.  Hurrah!`);
+            res.redirect(`/humans`);  
+          });
+        } 
+      });     
     }
   });
 });

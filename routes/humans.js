@@ -18,11 +18,14 @@ router.get(`/new`, mid.isLoggedIn, (req, res) => {
 });
 
 router.post(`/`, mid.isLoggedIn, (req, res) => {
-  Human.create(req.body.human, (err, humans) => {
+  req.body.addedBy = req.user;
+  Human.create(req.body.human, (err, human) => {
     if(err) {
       req.flash(`error`, err.message);
       res.redirect(`/new`);
     } else {
+      human.addedBy.id = req.user._id;
+      human.save();
       req.flash(`success`, `Human successfully added.`);
       res.redirect(`/humans`); 
     } 
