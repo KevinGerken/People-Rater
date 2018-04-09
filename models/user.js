@@ -9,7 +9,11 @@ const userSchema = new mongoose.Schema({
   image: String,
   imageAlt: String,
   username: String,
-  password: String
+  password: String,
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  }
 });
 
 userSchema.plugin(passportLocalMongoose);

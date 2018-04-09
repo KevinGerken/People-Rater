@@ -9,6 +9,7 @@
     <h1><%= comment.stars %></h1>
     <img src="<%= comment.author.image %>" alt="<%= comment.author.imageAlt%>">
     <h4><%=comment.author.username%></h4>
+    <h4><%=moment(comment.createdAt).fromNow()%></h4>
     <hr>
     <p>
       <%= comment.comment %>
@@ -19,6 +20,7 @@
     </a>
     <%}%>
     <hr>
+    <p>Added on: <%=moment(human.createdAt).format(`MMMM Do YYYY`)%></p>
   <%}%>
   <nav>
     <a href="/humans">

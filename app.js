@@ -12,7 +12,8 @@ const express = require(`express`),
       User = require(`./models/user`),
       humansRoute = require(`./routes/humans`),
       usersRoute = require(`./routes/users`),
-      commentsRoute = require(`./routes/comments`);
+      commentsRoute = require(`./routes/comments`),
+      moment = require(`moment`);
 
 mongoose.connect(`mongodb://localHost:27017/help`);
 
@@ -21,6 +22,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride(`_method`));
 app.use(flash());
+app.locals.moment = moment;
 
 app.use(expressSession({
   secret: `It's a secret don't tell anyone.`,

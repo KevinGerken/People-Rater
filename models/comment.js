@@ -11,6 +11,10 @@ const commentSchema = new mongoose.Schema({
     username: String,
     image: String,
     imageAlt: String
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now()
   }
 });
 

@@ -19,7 +19,6 @@ router.post(`/`, (req, res) => {
   req.body.user.username = req.body.username;
   User.register(new User(req.body.user),  req.body.password, (err, user) => {
     if(err) {
-      console.log(err);
       mid.errHandler(err, req, res, `back`);
     } else {
       let newHuman = {
