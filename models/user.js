@@ -13,7 +13,13 @@ const userSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now()
-  }
+  },
+  commentsMade: [
+    {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: `Comment`
+    }
+  ]
 });
 
 userSchema.plugin(passportLocalMongoose);

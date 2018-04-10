@@ -1,6 +1,7 @@
 const express = require(`express`),
       router = express.Router({mergeParams: true}),
       Human = require(`../models/human`),
+      Comment = require(`../models/comment`),
       mid = require(`../middleware`);
 
 router.get(`/`, (req,res) => {
@@ -69,13 +70,25 @@ router.put(`/:id`, mid.checkHumanCreator, (req, res) => {
 });
 
 router.delete(`/:id`, mid.checkHumanCreator, (req, res) => {
-  Human.findByIdAndRemove(req.params.id, (err) => {
+  Human.findById(req.params.id, (err, human) => {
     if(err){
-      req.flash(`error`, err.message);
-      res.redirect(`/humans`);
+      mid.errHandler(err, req, res, `back`);
     } else {
-      req.flash(`success`, `You deleted a human.  Harsh!`);
-      res.redirect(`/humans`);
+      for(let comment of human.comments){
+        Comment.findByIdAndRemove(comment, (err) => {
+          if(err) {
+            mid.errHandler(err, req, res, `back`);
+          }
+        });
+      }
+      human.remove((err) => {
+        if(err) {
+          mid.errHandler(err, req, res, `back`);
+        } else {
+          req.flash(`success`, `You deleted a human.  Harsh!`);
+          res.redirect(`/humans`);
+        }
+      });
     }
   });
 });

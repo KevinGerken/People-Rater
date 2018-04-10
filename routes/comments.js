@@ -2,6 +2,7 @@ const express = require(`express`),
       router = express.Router({mergeParams: true}),
       Comment = require(`../models/comment`),
       Human = require(`../models/human`),
+      User = require(`../models/user`),
       mid = require(`../middleware`);
 
 router.get(`/new`, mid.isLoggedIn, (req, res) => {
@@ -14,23 +15,32 @@ router.post(`/new`, mid.isLoggedIn, (req, res) => {
     if(err){
       mid.errHandler(err, req, res, `back`);
     } else {
-      Human.findById(req.params.id)
-      .populate(`comments`)
-      .exec((err, human) => {
-        comment.author.id = req.user._id;
-        comment.author.username = req.user.username;
-        comment.author.image = req.user.image;
-        comment.author.imageAlt = req.user.imageAlt;
-        comment.save();
-        human.comments.push(comment);
-        let starTotal = 0;
-        for(let comment of human.comments) {
-          starTotal += comment.stars;
+      User.findById(req.user._id, (err, user)=> {
+        if(err) {
+          mid.errHandler(err, req, res, `back`);
+        } else {
+          Human.findById(req.params.id)
+          .populate(`comments`)
+          .exec((err, human) => {
+            comment.author.id = req.user._id;
+            comment.author.username = req.user.username;
+            comment.author.image = req.user.image;
+            comment.author.imageAlt = req.user.imageAlt;
+            comment.forHuman = human._id;
+            comment.save();
+            human.comments.push(comment);
+            user.commentsMade.push(comment);
+            user.save();
+            let starTotal = 0;
+            for(let comment of human.comments) {
+              starTotal += comment.stars;
+            }
+            human.averageStars = (Number(starTotal) / human.comments.length).toFixed(1);
+            human.save();
+            res.redirect(`/humans/${human._id}`);
+          });
         }
-        human.averageStars = (Number(starTotal) / human.comments.length).toFixed(1);
-        human.save();
-        res.redirect(`/humans/${human._id}`);
-      });
+      })
     }
   });
 });

@@ -1,7 +1,8 @@
 const express = require(`express`),
       router = express.Router({mergeParams: true}),
       User = require(`../models/user`),
-      Human = require(`../models/human`)
+      Human = require(`../models/human`),
+      Comment = require(`../models/comment`),
       passport = require(`passport`),
       mid = require(`../middleware`);
 
@@ -79,15 +80,52 @@ router.put(`/:id`, mid.isUser, (req, res) => {
 });
 
 router.delete(`/:id`, mid.isUser, (req, res) => {
-  User.findByIdAndRemove(req.params.id, (err) => {
+  User.findByIdAndRemove(req.params.id, (err, user) => {
     if(err) {
       mid.errHandler(err, req, res, `back`);
     } else {
+      for(let com of user.commentsMade) {
+        Comment.findByIdAndRemove(com, (err, comm) =>{
+          if(err) { 
+            mid.errHandler(err, req, res, `back`);
+          } else {
+            Human.findById(comm.forHuman)
+              .populate({
+                path: `human.comments`,
+                model: `Comment`
+              })
+              .exec((err, human) => {
+                if(err){
+                  console.log(err);
+                  //mid.errHandler(err, req, res, `back`);
+                } else {
+                  console.log(human); 
+                  console.log(human.comments);
+                  console.log(comm);
+                  console.log(comm._id);
+                  for(let com of human.comments) {
+                    console.log(com);
+                    if(com.equals(comm._id)){
+                      human.comments.remove(com);
+                      let starTotal = 0;
+                      for(let comment of human.comments) {
+                        starTotal += comment.stars;
+                      }
+                      human.averageStars = (Number(starTotal) / human.comments.length || 0).toFixed(1);
+                      human.save(); 
+                    }
+                  }
+                }
+            });
+          }
+        });
+      }
       req.flash(`success`, `Your account has been deleted.`);
       res.redirect(`/humans`);
     }
   });
 });
+
 
 
 module.exports = router;

@@ -13,6 +13,7 @@ const express = require(`express`),
       humansRoute = require(`./routes/humans`),
       usersRoute = require(`./routes/users`),
       commentsRoute = require(`./routes/comments`),
+      mid = require(`./middleware`)
       moment = require(`moment`);
 
 mongoose.connect(`mongodb://localHost:27017/help`);
@@ -59,6 +60,29 @@ app.post(`/login`, passport.authenticate(`local`, {
 app.get(`/logout`, (req, res) => {
   req.logout();
   res.redirect(`/humans`);
+});
+
+app.get(`/reset`, mid.isLoggedIn, (req, res) => {
+  res.render(`users/reset`);
+})
+
+app.post(`/reset/:id`, mid.isUser, (req, res) => {
+  if(req.body.newPass === req.body.newPassConfirm) {
+    User.findById(req.params.id, (err, user) => {
+      if(err) {
+        mid.errHandler(err, req, res, `back`);
+      } else {
+        user.setPassword(req.body.newPassConfirm, () => {
+          user.save();
+          req.flash(`success`, `Password changed.`);
+          res.redirect(`/users/${user._id}`);
+        });
+      }
+    });
+  } else {
+    req.flash(`error`, `Passwords must match!`);
+    res.redirect(`/reset`);
+  }
 });
 
 app.use(`/humans`, humansRoute);
