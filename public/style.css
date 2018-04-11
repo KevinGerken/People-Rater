@@ -1,0 +1,35 @@
+.stars-container {
+  display: inline-block;
+  position: relative;
+  color: rgba(255, 255, 0, 0.2); }
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: yellow;
+  width: 0%;
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden; }
+
+ul {
+  display: inline-block;
+  direction: rtl; }
+
+li {
+  display: inline;
+  list-style-type: none;
+  color: yellow;
+  opacity: .2; }
+
+li:hover, li:hover ~ li {
+  opacity: 1; }
+
+.num-input {
+  display: none; }
+
+.clicked {
+  opacity: 1; }
+
+/*# sourceMappingURL=style.css.map */

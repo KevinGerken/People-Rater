@@ -2,10 +2,38 @@
 <section>
   <h1><%=human.firstName%> <%=human.lastName%></h1>
   <h4><%=human.city%>, <%=human.state%></h4>
-  <h2><%=human.averageStars%></h2>
+  <div class="stars-container">
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <div class="stars" style="width:<%=(human.averageStars/5) * 100%>%">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+    </div>
+  </div>
+  <%=human.averageStars%>
   <img src="<%=human.image%>" alt="<%=human.imgAlt%>">
   <% for(comment of human.comments) {%>
     <hr>
+    <div class="stars-container">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <div class="stars" style="width:<%=(comment.stars/5) * 100%>%">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </div>
+    </div>
     <h1><%= comment.stars %></h1>
     <img src="<%= comment.author.image %>" alt="<%= comment.author.imageAlt%>">
     <h4><%=comment.author.username%></h4>

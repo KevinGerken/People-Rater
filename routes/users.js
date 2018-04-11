@@ -96,15 +96,9 @@ router.delete(`/:id`, mid.isUser, (req, res) => {
               })
               .exec((err, human) => {
                 if(err){
-                  console.log(err);
-                  //mid.errHandler(err, req, res, `back`);
+                  mid.errHandler(err, req, res, `back`);
                 } else {
-                  console.log(human); 
-                  console.log(human.comments);
-                  console.log(comm);
-                  console.log(comm._id);
                   for(let com of human.comments) {
-                    console.log(com);
                     if(com.equals(comm._id)){
                       human.comments.remove(com);
                       let starTotal = 0;
