@@ -1,0 +1,115 @@
+html {
+  font-size: 62.5%; }
+
+body {
+  background: black;
+  color: white;
+  text-align: center;
+  height: 100%;
+  font-family: 'Montserrat', sans-serif; }
+
+div {
+  position: relative;
+  top: 5vh;
+  z-index: 1; }
+
+h1 {
+  font-size: 6rem;
+  text-shadow: black 1px 1px 15px;
+  margin-top: 0; }
+
+ul {
+  font-size: 4rem;
+  list-style: none; }
+
+div ul li {
+  position: absolute;
+  text-align: center;
+  text-shadow: black 1px 1px 15px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: text-animation 15s linear infinite; }
+
+div ul li:nth-child(2) {
+  animation-delay: 5s; }
+
+div ul li:nth-child(3) {
+  animation-delay: 10s; }
+
+a {
+  display: block;
+  width: 12rem;
+  margin: 4rem auto;
+  text-decoration: none;
+  background: #1d5aca;
+  padding: 1rem;
+  border-radius: 5rem;
+  font-size: 2rem;
+  color: white; }
+
+.slideshow {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 0; }
+
+.slideshow li {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  z-index: 0;
+  animation: image-animation 50s linear infinite; }
+
+.slideshow li:nth-child(1) {
+  background-image: url(images/splash1.jpg); }
+
+.slideshow li:nth-child(2) {
+  background-image: url(images/splash2.jpg);
+  animation-delay: 10s; }
+
+.slideshow li:nth-child(3) {
+  background-image: url(images/splash3.jpg);
+  animation-delay: 20s; }
+
+.slideshow li:nth-child(4) {
+  background-image: url(images/splash4.jpg);
+  animation-delay: 30s; }
+
+.slideshow li:nth-child(5) {
+  background-image: url(images/splash5.jpg);
+  animation-delay: 40s; }
+
+@keyframes image-animation {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-in; }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out; }
+  20% {
+    opacity: 1; }
+  30% {
+    opacity: 0; } }
+@keyframes text-animation {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-in; }
+  5% {
+    opacity: 1;
+    animation-timing-function: ease-out; }
+  40% {
+    opacity: 1; }
+  45% {
+    opacity: 0; } }
+
+/*# sourceMappingURL=splash.css.map */

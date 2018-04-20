@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+
+<section>
+  <form action="/reset/<%=currentUser._id%>/" method="post">
+    <label>
+      New Password
+      <input type="text" name="newPass" placeholer="New Password">
+    </label>
+    <label>
+      Confirm New Password
+      <input type="text" name="newPassConfirm" placeholer="Confirm New Password">
+    </label>
+    <button class="only-button">Submit</button>
+  </form>
+</section>
+
+<% include ../partials/footer %>
