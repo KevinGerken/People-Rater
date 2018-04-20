@@ -1,20 +1,47 @@
 <% include ../partials/header %>
-
-<form action="/users/<%=user._id%>?_method=PUT" method="POST">
-  <input type="text" value="<%=user.firstName%>" name="user[firstName]">
-  <input type="text" value="<%=user.lastName%>" name="user[lastName]">
-  <input type="text" value="<%=user.city%>" name="user[city]">
-  <input type="text" value="<%=user.state%>" name="user[state]">
-  <input type="text" value="<%=user.image%>" name="user[image]">
-  <input type="text" value="<%=user.imageAlt%>" name="user[imageAlt]">
-  <input type="text" value="<%=user.username%>" name="user[username]">
-  <button>Submit</button>
-</form>
-<form action="/users/<%=user._id%>?_method=DELETE" method="POST">
-<button>Delete Account</button>
-</form>
-<a href="/reset">
-  Reset Password
-</a>
-
+<section>
+  <form action="/users/<%=user._id%>?_method=PUT" method="POST">
+    <label>
+      First Name
+      <input type="text" value="<%=user.firstName%>" name="user[firstName]">
+    </label>
+    <label>
+      Last Name
+      <input type="text" value="<%=user.lastName%>" name="user[lastName]">
+    </label>
+    <label>
+      City
+      <input type="text" value="<%=user.city%>" name="user[city]">
+    </label>
+    <label>
+      State
+      <input type="text" value="<%=user.state%>" name="user[state]">
+    </label>
+    <label>
+      Image URL
+      <input type="text" value="<%=user.image%>" name="user[image]">
+    </label>
+    <label>
+      Image Description
+      <input type="text" value="<%=user.imageAlt%>" name="user[imageAlt]">
+    </label>
+    <label>
+      Username
+      <input type="text" value="<%=user.username%>" name="user[username]">
+    </label>
+    <div class="flex-container">
+      <button>
+        Submit
+      </button>
+      <a href="/reset">
+        Reset Password
+      </a>
+      <form action="/users/<%=user._id%>?_method=DELETE" method="POST">
+        <button>
+          Delete Account
+        </button>
+      </form>
+    </div>
+  </form>
+</section>
 <% include ../partials/footer %>

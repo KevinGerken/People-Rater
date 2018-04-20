@@ -1,15 +1,36 @@
 <% include ../partials/header %>
-
-<form action="/humans/<%=human._id%>?_method=PUT" method="POST">
-  <input type="text" value="<%=human.firstName%>" name="human[firstName]">
-  <input type="text" value="<%=human.lastName%>" name="human[lastName]">
-  <input type="text" value="<%=human.city%>" name="human[city]">
-  <input type="text" value="<%=human.state%>" name="human[state]">
-  <input type="text" value="<%=human.image%>" name="human[image]">
-  <input type="text" value="<%=human.imageAlt%>" name="human[imageAlt]">
-  <button>Submit</button>
-</form>
-<form action="/humans/<%=human._id%>?_method=DELETE" method="POST">
-  <button>Delete</button>
-</form>
+<section>
+  <form action="/humans/<%=human._id%>?_method=PUT" method="POST">
+    <label>
+      First Name
+      <input type="text" value="<%=human.firstName%>" name="human[firstName]">
+    </label>
+    <label>
+      Last Name
+      <input type="text" value="<%=human.lastName%>" name="human[lastName]">
+    </label>
+    <label>
+      City
+      <input type="text" value="<%=human.city%>" name="human[city]">
+    </label>
+    <label>
+      State
+      <input type="text" value="<%=human.state%>" name="human[state]">
+    </label>
+    <label>
+      Image URL
+      <input type="text" value="<%=human.image%>" name="human[image]">
+    </label>
+    <label>
+      Image Description
+      <input type="text" value="<%=human.imageAlt%>" name="human[imageAlt]">
+    </label>
+    <div class="flex-container">
+      <button>Submit</button>
+      <form action="/humans/<%=human._id%>?_method=DELETE" method="POST">
+      <button>Delete</button>
+      </form>
+    </div>
+  </form>
+</section>
 <% include ../partials/footer %>

@@ -1,13 +1,31 @@
 <% include ../partials/header %>
-
-<form action="/humans" method="POST">
-  <input type="text" placeholder="First Name" name="human[firstName]">
-  <input type="text" placeholder="Last Name" name="human[lastName]">
-  <input type="text" placeholder="City" name="human[city]">
-  <input type="text" placeholder="State" name="human[state]">
-  <input type="text" placeholder="Image URL" name="human[image]">
-  <input type="text" placeholder="Describe the image" name="human[imageAlt]">
-  <button>Submit</button>
-</form>
-
+<section>
+  <form action="/humans" method="POST">
+    <label>
+      First Name
+      <input type="text" placeholder="First Name" name="human[firstName]">
+    </label>
+    <label>
+      Last Name
+      <input type="text" placeholder="Last Name" name="human[lastName]">
+    </label>
+    <label>
+      City
+      <input type="text" placeholder="City" name="human[city]">
+    </label>
+    <label>
+      State
+      <input type="text" placeholder="State" name="human[state]">
+    </label>
+    <label>
+      Image URL
+      <input type="text" placeholder="Image URL" name="human[image]">
+    </label>
+    <label>
+      Image Description
+      <input type="text" placeholder="Describe the image" name="human[imageAlt]">
+    </label>
+    <button class="only-button">Submit</button>
+  </form>
+</section>
 <% include ../partials/footer %>

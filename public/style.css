@@ -1,3 +1,207 @@
+html {
+  font-size: 62.5%; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; }
+
+.error, .success {
+  font-size: 2rem; }
+
+.error {
+  background: rgba(255, 0, 0, 0.5); }
+
+.success {
+  background: rgba(0, 255, 0, 0.5); }
+
+body {
+  color: #111;
+  background: #6191e8;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right bottom, #b9d0f9, #6191e8);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right bottom, #b9d0f9, #6191e8);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-size: cover;
+  background-position: fixed;
+  background-repeat: no-repeat;
+  font-size: 1.6rem;
+  font-family: 'Montserrat', sans-serif; }
+
+a, button {
+  min-width: 5rem;
+  text-decoration: none;
+  color: #fff;
+  background: #1d5aca;
+  padding: 1.5rem;
+  border-radius: 5rem;
+  margin: 1rem;
+  text-align: center;
+  font-size: 1.6rem;
+  border-top: 3px solid #b9d0f9;
+  border-left: 3px solid #b9d0f9;
+  border-right: 3px solid #6191e8;
+  border-bottom: 3px solid #6191e8; }
+
+a:hover, button:hover {
+  background: #6191e8; }
+
+form {
+  width: 100%;
+  margin: auto; }
+
+label {
+  display: block; }
+
+input {
+  box-sizing: border-box;
+  display: block;
+  border-radius: 50px;
+  width: 100%;
+  font-size: 1.6rem;
+  margin: 1rem 0;
+  padding: .5rem; }
+
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40rem;
+  padding: 1.5rem;
+  margin: auto;
+  border-radius: 50px;
+  resize: none; }
+
+.only-button {
+  display: block;
+  margin: 2rem auto;
+  max-width: 15rem; }
+
+.only-nav {
+  margin: auto;
+  max-width: 15rem; }
+
+.large-image {
+  max-width: 100%;
+  margin: 1rem auto;
+  display: block; }
+
+.align-right {
+  text-align: right; }
+
+h1, h2, h3, h4 {
+  display: inline;
+  margin: 0; }
+
+.stars-container, h3 {
+  clear: both;
+  float: right; }
+
+.stars-container {
+  font-size: 2rem; }
+
+h3 {
+  font-size: 1.2rem; }
+
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap; }
+
+.flex-container-sb {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+.bottom-aligned {
+  position: absolute;
+  bottom: 0;
+  width: 100%; }
+
+section {
+  width: 90vw;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 2rem auto;
+  font-size: 2rem;
+  padding: 2rem 1rem;
+  max-width: 75rem; }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  max-width: 75rem;
+  margin: auto; }
+  nav a {
+    border-radius: 0 0 25% 25%;
+    margin-top: 0;
+    border: 3px solid #6191e8;
+    border-top: none; }
+
+.human-index {
+  position: relative;
+  padding-bottom: 7rem; }
+  .human-index img {
+    max-width: 75%;
+    max-height: 30vh;
+    border-radius: 30px;
+    display: block;
+    clear: left; }
+  .human-index h3 {
+    display: block;
+    width: 100%;
+    text-align: right; }
+
+.new {
+  display: block;
+  margin: 2rem auto;
+  max-width: 15rem;
+  text-align: center; }
+
+.show-human h3 {
+  display: block;
+  width: 100%;
+  text-align: right; }
+.show-human .flex-container {
+  justify-content: space-between;
+  align-items: flex-end; }
+
+.comments {
+  width: 100%;
+  margin: auto;
+  border-top: 5px solid #1d5aca;
+  padding-top: 1rem; }
+  .comments img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: inline;
+    margin: 0; }
+  .comments h1, .comments h4 {
+    text-align: right; }
+  .comments .flex-container {
+    margin-top: 1rem; }
+  .comments div h3, .comments div h4 {
+    font-size: 2rem;
+    margin: 0; }
+  .comments a {
+    display: block;
+    width: 15rem;
+    margin: auto; }
+
+.user-show h1 {
+  display: block;
+  text-align: center; }
+
+.review-new .flex-container {
+  justify-content: space-between; }
+
+.nav-bottom a {
+  border-radius: 25% 25% 0 0;
+  margin-bottom: 0;
+  border: 3px solid #b9d0f9;
+  border-bottom: none; }
+
 .stars-container {
   display: inline-block;
   position: relative;
@@ -31,5 +235,24 @@ li:hover, li:hover ~ li {
 
 .clicked {
   opacity: 1; }
+
+@media screen and (min-width: 750px) {
+  nav {
+    justify-content: space-around; }
+
+  label {
+    width: 49%;
+    display: inline-block;
+    margin-right: .4rem;
+    text-align: center; }
+
+  .index {
+    display: grid;
+    grid-template-columns: 1fr 1fr; }
+    .index section {
+      width: 90%; } }
+@media screen and (min-width: 1200px) {
+  .index {
+    grid-template-columns: 1fr 1fr 1fr; } }
 
 /*# sourceMappingURL=style.css.map */

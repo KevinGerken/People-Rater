@@ -1,13 +1,17 @@
 <% include ../partials/header %>
 <% for(user of users) { %>
   <section>
-    <h1><%=user.firstName%> <%=user.lastName%></h1>
-    <h4><%=user.city%>, <%=user.state%></h4>
-    <img src="<%=user.image%>" alt="<%=user.imgAlt%>">
+    <div class="flex-container">
+      <h1><%=user.firstName%> <%=user.lastName%></h1>
+      <h4><%=user.city%>, <%=user.state%></h4>
+    </div>
+    <img class="large-image" src="<%=user.image%>" alt="<%=user.imgAlt%>">
     <%if(currentUser && user._id.equals(currentUser._id)) {%>
-      <a href="/users/<%=user._id%>/edit">Edit</a>
+      <a class="only-button" href="/users/<%=user._id%>/edit">Edit</a>
     <%}%>
   </section>
 <% } %>
-<a href="/users/new">Add User</a>
+<nav class="only-nav nav-bottom">
+  <a href="/users/new">Add User</a>
+</nav>
 <% include ../partials/footer %>

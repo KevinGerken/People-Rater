@@ -1,7 +1,9 @@
 <% include ../partials/header %>
-<section>
-  <h1><%=human.firstName%> <%=human.lastName%></h1>
-  <h4><%=human.city%>, <%=human.state%></h4>
+<section class="show-human">
+  <div class="flex-container">
+    <h1><%=human.firstName%> <%=human.lastName%></h1>
+    <h2><%=human.city%>, <%=human.state%></h2>
+  </div>
   <div class="stars-container">
     <i class="fas fa-star"></i>
     <i class="fas fa-star"></i>
@@ -16,41 +18,47 @@
       <i class="fas fa-star"></i>
     </div>
   </div>
-  <%=human.averageStars%>
-  <img src="<%=human.image%>" alt="<%=human.imgAlt%>">
+  <h3><%=human.averageStars%></h3>
+  <img class="large-image" src="<%=human.image%>" alt="<%=human.imgAlt%>">
+  <p class="align-right">Added on: <%=moment(human.createdAt).format(`MMMM Do YYYY`)%></p>
   <% for(comment of human.comments) {%>
-    <hr>
-    <div class="stars-container">
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <div class="stars" style="width:<%=(comment.stars/5) * 100%>%">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
+    <div class="comments">
+      <div class="flex-container">
+        <img src="<%= comment.author.image %>" alt="<%= comment.author.imageAlt%>">
+        <div>
+          <div class="stars-container">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <div class="stars" style="width:<%=(comment.stars/5) * 100%>%">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <h3><%= comment.stars %></h3>
+        </div>
       </div>
+      <div class="flex-container">
+        <h3><%=comment.author.username%></h3>
+        <h4><%=moment(comment.createdAt).fromNow()%></h4>
+      </div>
+      <p>
+        <%= comment.comment %>
+      </p>
+      <%if(currentUser && comment.author.id.equals(currentUser._id)) {%>
+      <a href="/humans/<%=human._id%>/comments/<%=comment._id%>/edit">
+        Edit Comment
+      </a>
+      <%}%>
     </div>
-    <h1><%= comment.stars %></h1>
-    <img src="<%= comment.author.image %>" alt="<%= comment.author.imageAlt%>">
-    <h4><%=comment.author.username%></h4>
-    <h4><%=moment(comment.createdAt).fromNow()%></h4>
-    <hr>
-    <p>
-      <%= comment.comment %>
-    </p>
-    <%if(currentUser && comment.author.id.equals(currentUser._id)) {%>
-    <a href="/humans/<%=human._id%>/comments/<%=comment._id%>/edit">
-      Edit Comment
-    </a>
-    <%}%>
-    <hr>
-    <p>Added on: <%=moment(human.createdAt).format(`MMMM Do YYYY`)%></p>
   <%}%>
-  <nav>
+</section>
+<nav class="nav-bottom">
     <a href="/humans">
       Back
     </a>
@@ -63,5 +71,4 @@
       </a>
     <%}%>
   </nav>
-</section>
 <% include ../partials/footer %>

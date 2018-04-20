@@ -1,16 +1,23 @@
 <% include ../partials/header %>
-
-<form action="/humans/<%=humanId%>/comments/new" method="POST">
-  <ul class="ratings">
-    <li class="rating-stars star5"><i class="fas fa-star"></i></li>
-    <li class="rating-stars star4"><i class="fas fa-star"></i></li>
-    <li class="rating-stars star3"><i class="fas fa-star"></i></li>
-    <li class="rating-stars star2"><i class="fas fa-star"></i></li>
-    <li class="rating-stars star1"><i class="fas fa-star"></i></li>
-  </ul>
-  <input class="num-input" type="number" value=3 min=1 max=5 name=comment[stars]>
-  <input type="text" placeholder="Your review here." name=comment[comment]>
-  <button>Add Review</button>
-</form>
-
+<section class="review-new">
+  <form action="/humans/<%=humanId%>/comments/new" method="POST">
+    <div class="flex-container">
+      <p>
+        Your Review:
+      </p>
+      <ul class="ratings">
+        <li class="rating-stars star5"><i class="fas fa-star"></i></li>
+        <li class="rating-stars star4"><i class="fas fa-star"></i></li>
+        <li class="rating-stars star3"><i class="fas fa-star"></i></li>
+        <li class="rating-stars star2"><i class="fas fa-star"></i></li>
+        <li class="rating-stars star1"><i class="fas fa-star"></i></li>
+      </ul>
+    </div>
+    <input class="num-input" type="number" value=3 min=1 max=5 name=comment[stars]>
+    <textarea placeholder="Your review here." id="comment" name=comment[comment]></textarea>
+    <button class="only-button">
+      Add Review
+    </button>
+  </form>
+</section>
 <% include ../partials/footer %>

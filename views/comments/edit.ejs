@@ -1,13 +1,31 @@
 <% include ../partials/header %>
-
-<form action="/humans/<%=humanId%>/comments/<%=comment._id%>?_method=PUT" method="POST">
-  <input type="number" value="<%=comment.stars%>" min= 1 max=5 name="comment[stars]">
-  <input type="text" value="<%=comment.comment%>" name="comment[comment]">
-  <button>Add Review</button>
-</form>
-
-<form action="/humans/<%=humanId%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
-  <button>Delete Comment</button>
-</form>
+<section class="comment-edit">
+  <form action="/humans/<%=humanId%>/comments/<%=comment._id%>?_method=PUT" method="POST">
+    <div class="flex-container-sb">
+      <p>
+        Your Review:
+      </p>
+      <ul class="ratings">
+        <li class="rating-stars star5"><i class="fas fa-star"></i></li>
+        <li class="rating-stars star4"><i class="fas fa-star"></i></li>
+        <li class="rating-stars star3"><i class="fas fa-star"></i></li>
+        <li class="rating-stars star2"><i class="fas fa-star"></i></li>
+        <li class="rating-stars star1"><i class="fas fa-star"></i></li>
+      </ul>
+    </div>
+    <input class="num-input" type="number" value="<%=comment.stars%>" min= 1 max=5 name="comment[stars]">
+    <textarea name="comment[comment]"><%=comment.comment%></textarea>
+    <div class="flex-container">
+      <button>
+        Update Review
+      </button>
+      <form action="/humans/<%=humanId%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+        <button>
+          Delete Review
+        </button>
+      </form>
+    </div>
+  </form>
+</section>
 
 <% include ../partials/footer %>

@@ -1,14 +1,24 @@
 <% include ../partials/header %>
 
-<h1><%=user.username%></h1>
-<h4><%=user.firstName%> <%=user.lastName%></h4>
-<h4><%=user.city%>, <%=user.state%></h4>
-<img src="<%=user.image%>" alt="<%=user.imageAlt%>">
-<h4>Member Since: <%=moment(user.createdAt).format(`MMMM Do YYYY`)%></h4>
-<%if(currentUser && user._id.equals(currentUser._id)) {%>
-  <a href="/users/<%=user._id%>/edit">
-    Edit Account
-  </a>
-<%}%>
+<section class="user-show">
+  <h1><%=user.username%></h1>
+  <div class="flex-container">
+    <h2>
+      <%=user.firstName%> <%=user.lastName%>
+    </h2>
+    <h2>
+      <%=user.city%>, <%=user.state%>
+    </h2>
+  </div>
+  <img class="large-image" src="<%=user.image%>" alt="<%=user.imageAlt%>">
+  <p>
+    Member Since: <%=moment(user.createdAt).format(`MMMM Do YYYY`)%>
+  </p>
+  <%if(currentUser && user._id.equals(currentUser._id)) {%>
+    <a class="only-button" href="/users/<%=user._id%>/edit">
+      Edit Account
+    </a>
+  <%}%>
+</section>
 
 <% include ../partials/footer %>
