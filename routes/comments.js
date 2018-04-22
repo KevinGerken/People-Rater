@@ -26,6 +26,7 @@ router.post(`/new`, mid.isLoggedIn, (req, res) => {
             comment.author.username = req.user.username;
             comment.author.image = req.user.image;
             comment.author.imageAlt = req.user.imageAlt;
+            comment.author.humanAccount = req.user.humanAccount.id;
             comment.forHuman = human._id;
             comment.save();
             human.comments.push(comment);
@@ -35,6 +36,7 @@ router.post(`/new`, mid.isLoggedIn, (req, res) => {
             for(let comment of human.comments) {
               starTotal += comment.stars;
             }
+            human.ratingsCount = human.comments.length;
             human.averageStars = (Number(starTotal) / human.comments.length).toFixed(1);
             human.save();
             res.redirect(`/humans/${human._id}`);

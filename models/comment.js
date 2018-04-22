@@ -10,7 +10,8 @@ const commentSchema = new mongoose.Schema({
     },
     username: String,
     image: String,
-    imageAlt: String
+    imageAlt: String,
+    humanAccount: String
   },
   createdAt: {
     type: Date,

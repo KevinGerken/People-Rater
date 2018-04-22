@@ -19,12 +19,19 @@
     </div>
   </div>
   <h3><%=human.averageStars%></h3>
+  <h3><%= human.ratingsCount %> Reviews</h3>
   <img class="large-image" src="<%=human.image%>" alt="<%=human.imgAlt%>">
+  <p><%= human.description %></p>
   <p class="align-right">Added on: <%=moment(human.createdAt).format(`MMMM Do YYYY`)%></p>
   <% for(comment of human.comments) {%>
     <div class="comments">
       <div class="flex-container">
-        <img src="<%= comment.author.image %>" alt="<%= comment.author.imageAlt%>">
+        <div>
+          <a class="not-a-button" href="/humans/<%=comment.author.humanAccount%>">
+            <img src="<%= comment.author.image %>" alt="<%= comment.author.imageAlt%>">
+          </a>
+          <h3><%=comment.author.username%></h3>
+        </div>
         <div>
           <div class="stars-container">
             <i class="fas fa-star"></i>
@@ -40,12 +47,9 @@
               <i class="fas fa-star"></i>
             </div>
           </div>
-          <h3><%= comment.stars %></h3>
+          <p><%= comment.stars %></p>
+          <p><%=moment(comment.createdAt).fromNow()%></p>
         </div>
-      </div>
-      <div class="flex-container">
-        <h3><%=comment.author.username%></h3>
-        <h4><%=moment(comment.createdAt).fromNow()%></h4>
       </div>
       <p>
         <%= comment.comment %>
@@ -58,7 +62,7 @@
     </div>
   <%}%>
 </section>
-<nav class="nav-bottom">
+  <nav class="nav-bottom">
     <a href="/humans">
       Back
     </a>
@@ -71,4 +75,5 @@
       </a>
     <%}%>
   </nav>
+
 <% include ../partials/footer %>

@@ -66,7 +66,7 @@ input {
 textarea {
   box-sizing: border-box;
   width: 100%;
-  height: 40rem;
+  height: 25rem;
   padding: 1.5rem;
   margin: auto;
   border-radius: 50px;
@@ -116,6 +116,7 @@ h3 {
 .bottom-aligned {
   position: absolute;
   bottom: 0;
+  left: 0;
   width: 100%; }
 
 section {
@@ -140,17 +141,20 @@ nav {
 
 .human-index {
   position: relative;
-  padding-bottom: 7rem; }
+  padding-bottom: 7rem;
+  min-height: 45vh; }
   .human-index img {
     max-width: 75%;
     max-height: 30vh;
     border-radius: 30px;
-    display: block;
-    clear: left; }
+    float: left;
+    margin-right: 1rem; }
   .human-index h3 {
     display: block;
     width: 100%;
     text-align: right; }
+  .human-index .edit {
+    clear: left; }
 
 .new {
   display: block;
@@ -170,17 +174,27 @@ nav {
   width: 100%;
   margin: auto;
   border-top: 5px solid #1d5aca;
-  padding-top: 1rem; }
+  padding: 1rem 0; }
   .comments img {
     height: 100px;
     width: 100px;
     border-radius: 50%;
     display: inline;
     margin: 0; }
+  .comments .not-a-button {
+    border: none;
+    background: none;
+    margin: 0; }
   .comments h1, .comments h4 {
     text-align: right; }
   .comments .flex-container {
-    margin-top: 1rem; }
+    margin-top: 1rem;
+    align-items: center; }
+    .comments .flex-container div h3 {
+      text-align: center; }
+    .comments .flex-container p {
+      text-align: right;
+      margin: .5rem 0; }
   .comments div h3, .comments div h4 {
     font-size: 2rem;
     margin: 0; }
@@ -192,15 +206,19 @@ nav {
 .user-show h1 {
   display: block;
   text-align: center; }
+.user-show p {
+  text-align: right; }
 
 .review-new .flex-container {
   justify-content: space-between; }
 
-.nav-bottom a {
-  border-radius: 25% 25% 0 0;
-  margin-bottom: 0;
-  border: 3px solid #b9d0f9;
-  border-bottom: none; }
+.nav-bottom {
+  width: 100%; }
+  .nav-bottom a {
+    border-radius: 25% 25% 0 0;
+    margin-bottom: 0;
+    border: 3px solid #b9d0f9;
+    border-bottom: none; }
 
 .stars-container {
   display: inline-block;
@@ -245,6 +263,9 @@ li:hover, li:hover ~ li {
     display: inline-block;
     margin-right: .4rem;
     text-align: center; }
+
+  .full-width {
+    width: 100%; }
 
   .index {
     display: grid;

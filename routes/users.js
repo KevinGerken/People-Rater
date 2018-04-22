@@ -29,6 +29,7 @@ router.post(`/`, (req, res) => {
         state: req.body.user.state,
         image: req.body.user.image,
         imageAlt: req.body.user.imageAlt,
+        description: req.body.description,
         addedBy: {
           id: user._id
         }
@@ -38,6 +39,8 @@ router.post(`/`, (req, res) => {
           req.flash(`error`, err.message);
           res.redirect(`/new`);
         } else {
+          user.humanAccount.id = human._id;
+          user.save();
           passport.authenticate(`local`)(req, res, () => {
             req.flash(`success`, `Account created successfully.  Hurrah!`);
             res.redirect(`/humans`);  

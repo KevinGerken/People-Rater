@@ -36,12 +36,13 @@
       <a href="/reset">
         Reset Password
       </a>
-      <form action="/users/<%=user._id%>?_method=DELETE" method="POST">
-        <button>
-          Delete Account
-        </button>
-      </form>
+      <a href="#" class="delete-button">
+        Delete Account
+      </a>
     </div>
   </form>
+  <form class="delete-form" action="/users/<%=user._id%>?_method=DELETE" method="POST">    
+  </form>
+  
 </section>
 <% include ../partials/footer %>

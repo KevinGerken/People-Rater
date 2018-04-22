@@ -7,7 +7,9 @@ const humanSchema = new mongoose.Schema({
   state: String,
   image: String,
   imageAlt: String,
+  description: String,
   averageStars: Number,
+  ratingsCount: Number,
   addedBy: {
     id: {
       type: mongoose.Schema.Types.ObjectId,

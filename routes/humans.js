@@ -1,5 +1,6 @@
 const express = require(`express`),
       router = express.Router({mergeParams: true}),
+      User = require(`../models/user`),
       Human = require(`../models/human`),
       Comment = require(`../models/comment`),
       mid = require(`../middleware`);
@@ -27,8 +28,33 @@ router.post(`/`, mid.isLoggedIn, (req, res) => {
     } else {
       human.addedBy.id = req.user._id;
       human.save();
-      req.flash(`success`, `Human successfully added.`);
-      res.redirect(`/humans`); 
+      Comment.create(req.body.comment, (err, comment) => {
+        if(err) {
+          mid.errHandler(err, req, res, `back`);
+        } else {
+          User.findById(req.user._id, (err, user) =>{
+            if(err){
+              mid.errHandler(err, req, res, `back`);
+            } else {
+              comment.author.id = req.user._id;
+              comment.author.username = req.user.username;
+              comment.author.image = req.user.image;
+              comment.author.imageAlt = req.user.imageAlt;
+              comment.author.humanAccount = req.user.humanAccount.id;
+              comment.forHuman = human._id;
+              comment.save();
+              human.comments.push(comment);
+              human.ratingsCount = 1;
+              human.averageStars = req.body.comment.stars;
+              human.save();
+              user.commentsMade.push(comment);
+              user.save();
+              req.flash(`success`, `Human successfully added.`);
+              res.redirect(`/humans`); 
+            }
+          });
+        }
+      });
     } 
   });
 });

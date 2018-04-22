@@ -8,11 +8,18 @@ const userSchema = new mongoose.Schema({
   state: String,
   image: String,
   imageAlt: String,
+  description: String,
   username: String,
   password: String,
   createdAt: {
     type: Date,
     default: Date.now()
+  },
+  humanAccount: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: `Human`
+    }
   },
   commentsMade: [
     {

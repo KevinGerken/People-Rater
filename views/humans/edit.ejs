@@ -25,12 +25,18 @@
       Image Description
       <input type="text" value="<%=human.imageAlt%>" name="human[imageAlt]">
     </label>
+    <label>
+      Person Description
+      <textarea name="human[description]"><%= human.description %></textarea>
+    </label>
     <div class="flex-container">
       <button>Submit</button>
-      <form action="/humans/<%=human._id%>?_method=DELETE" method="POST">
-      <button>Delete</button>
-      </form>
+      <a href="#" class="delete-button">
+        Delete Person
+      </a>
     </div>
+  </form>
+  <form action="/humans/<%=human._id%>?_method=DELETE" class="delete-form" method="POST">
   </form>
 </section>
 <% include ../partials/footer %>

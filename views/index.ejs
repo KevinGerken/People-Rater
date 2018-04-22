@@ -21,16 +21,18 @@
       </div>
     </div>
     <h3><%=human.averageStars%></h3>
-    <img src="<%=human.image%>" alt="<%=human.imgAlt%>">   
+    <h3><%= human.ratingsCount %> Reviews</h3>
+    <img src="<%=human.image%>" alt="<%=human.imgAlt%>">
+    <p><%=human.description%></p>
+    <% if(currentUser && human.addedBy.id.equals(currentUser._id)) {%>   
+      <a href="/humans/<%=human._id%>/edit" class="edit only-button">
+        Edit
+      </a>
+    <%}%>
     <div class="flex-container bottom-aligned">
       <a href="/humans/<%=human._id%>" class="view">
         View Reviews
       </a>
-      <% if(currentUser && human.addedBy.id.equals(currentUser._id)) {%>   
-        <a href="/humans/<%=human._id%>/edit" class="edit">
-          Edit
-        </a>
-      <%}%>
       <a href="/humans/<%=human._id%>/comments/new" class="add">
         Add Review
       </a>
