@@ -163,6 +163,17 @@ nav {
   .human-index .edit {
     clear: left; }
 
+.pagination {
+  text-align: center; }
+  .pagination ul {
+    list-style: none;
+    display: inline-block;
+    padding: 0; }
+  .pagination li {
+    display: inline; }
+  .pagination a {
+    margin: 0; }
+
 .new {
   display: block;
   margin: 2rem auto;

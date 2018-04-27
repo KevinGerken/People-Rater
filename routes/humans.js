@@ -6,12 +6,22 @@ const express = require(`express`),
       mid = require(`../middleware`);
 
 router.get(`/`, (req,res) => {
-  Human.find({}, (err, humans) => {
-    if(err) {
-      req.flash(`error`, err.message)
-    } else {
-      res.render(`index`, {humans: humans}); 
-    }
+    const perPage = 6,
+        pageQuery = Number(req.query.page),
+        pageNumber = pageQuery ? pageQuery : 1;
+  Human.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec((err, humans) => {
+    Human.count().exec((err, count) =>{
+      if(err) {
+        req.flash(`error`, err.message)
+      } else {
+        console.log(Math.ceil(count/perPage));
+        res.render(`index`, {
+          humans: humans,
+          current: pageNumber,
+          pages: Math.ceil(count/perPage)
+        }); 
+      }
+    });
   });  
 });
 
