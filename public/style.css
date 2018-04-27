@@ -1,3 +1,10 @@
+a:focus, button:focus {
+  outline: 3px solid #0ac3b0; }
+
+textarea:focus, input:focus {
+  outline: none;
+  background: #b2f8f1; }
+
 html {
   font-size: 62.5%; }
 
@@ -48,7 +55,7 @@ a:hover, button:hover {
   background: #6191e8; }
 
 form {
-  width: 100%;
+  width: 90%;
   margin: auto; }
 
 label {
@@ -235,21 +242,33 @@ nav {
   white-space: nowrap;
   overflow: hidden; }
 
-ul {
+.ratings {
   display: inline-block;
-  direction: rtl; }
+  direction: rtl;
+  width: auto;
+  border: none; }
 
-li {
-  display: inline;
-  list-style-type: none;
+.rating-stars {
+  display: relative;
+  position: absolute;
+  top: -999px; }
+
+.rating-stars:focus + label {
+  outline: 3px solid #0ac3b0; }
+
+.rating-label {
+  display: inline-block;
+  overflow: hidden;
+  width: 1em;
+  white-space: nowrap;
+  cursor: pointer;
   color: yellow;
   opacity: .2; }
 
-li:hover, li:hover ~ li {
+.rating-label:hover,
+.rating-label:hover ~ .rating-label,
+.rating-stars:checked ~ .rating-label {
   opacity: 1; }
-
-.num-input {
-  display: none; }
 
 .clicked {
   opacity: 1; }
