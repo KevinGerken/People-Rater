@@ -143,8 +143,30 @@ nav {
   nav a {
     border-radius: 0 0 25% 25%;
     margin-top: 0;
+    padding-bottom: .5rem;
     border: 3px solid #6191e8;
     border-top: none; }
+
+.header-login {
+  margin: 1rem auto;
+  display: block;
+  padding: 0;
+  text-align: center; }
+  .header-login form {
+    display: inline; }
+    .header-login form label {
+      display: inline-block;
+      width: 48%; }
+    .header-login form button {
+      display: inline;
+      position: relative;
+      top: -1rem; }
+  .header-login button {
+    position: relative;
+    top: -1rem; }
+
+.hidden {
+  display: none; }
 
 .human-index {
   position: relative;
@@ -227,6 +249,10 @@ nav {
 .user-show p {
   text-align: right; }
 
+.edit-h1 {
+  display: block;
+  text-align: center; }
+
 .review-new .flex-container {
   justify-content: space-between; }
 
@@ -289,10 +315,13 @@ nav {
     justify-content: space-around; }
 
   label {
-    width: 49%;
+    width: 48%;
     display: inline-block;
     margin-right: .4rem;
     text-align: center; }
+
+  .header-login form label {
+    width: 30%; }
 
   .full-width {
     width: 100%; }
