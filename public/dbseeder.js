@@ -143,7 +143,7 @@ function seedUser(i) {
     let username = firstNames[i];
     let password = `password`;
     let description = random(lorem);
-    post(`http://localhost:3000/users`, {
+    post(`/users`, {
       'user[firstName]': user.firstName,
       'user[lastName]': user.lastName,
       'user[city]': user.city,
