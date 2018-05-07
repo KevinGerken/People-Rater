@@ -4,22 +4,28 @@
     <h1><%=human.firstName%> <%=human.lastName%></h1>
     <h2><%=human.city%>, <%=human.state%></h2>
   </div>
-  <div class="stars-container">
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <i class="fas fa-star"></i>
-    <div class="stars" style="width:<%=(human.averageStars/5) * 100%>%">
+  <% if(human.averageStars){%>
+    <div class="stars-container">
       <i class="fas fa-star"></i>
       <i class="fas fa-star"></i>
       <i class="fas fa-star"></i>
       <i class="fas fa-star"></i>
       <i class="fas fa-star"></i>
+      <div class="stars" style="width:<%=(human.averageStars/5) * 100%>%">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </div>
     </div>
-  </div>
-  <h3><%=human.averageStars%></h3>
-  <h3><%= human.ratingsCount %> Reviews</h3>
+    <h3><%=human.averageStars%></h3>
+    <h3><%= human.ratingsCount %> Reviews</h3>
+  <%} else {%>
+    <h3>
+      No Reviews
+    </h3>
+  <%}%>
   <img class="large-image" src="<%=human.image%>" alt="<%=human.imgAlt%>">
   <p><%= human.description %></p>
   <p class="align-right">Added on: <%=moment(human.createdAt).format(`MMMM Do YYYY`)%></p>

@@ -13,8 +13,9 @@ const express = require(`express`),
       humansRoute = require(`./routes/humans`),
       usersRoute = require(`./routes/users`),
       commentsRoute = require(`./routes/comments`),
-      mid = require(`./middleware`)
-      moment = require(`moment`);
+      mid = require(`./middleware`),
+      moment = require(`moment`),
+      compression = require(`compression`);
 
 mongoose.connect(`mongodb://localHost:27017/help`);
 
@@ -23,6 +24,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride(`_method`));
 app.use(flash());
+app.use(compression());
 app.locals.moment = moment;
 
 app.use(expressSession({
@@ -52,7 +54,7 @@ app.get(`/login`, (req, res) => {
 });
  
 app.post(`/login`, passport.authenticate(`local`, {
-    successRedirect:`/humans`,
+    successRedirect:`back`,
     failureRedirect: `/users/login`
   }), (req, res) => { 
   });
@@ -68,18 +70,18 @@ app.get(`/reset`, mid.isLoggedIn, (req, res) => {
 
 app.post(`/reset/:id`, mid.isUser, (req, res) => {
   if(req.body.newPass === req.body.newPassConfirm) {
-    User.findById(req.params.id, (err, user) => {
-      if(err) {
-        mid.errHandler(err, req, res, `back`);
-      } else {
+      User.findById(req.params.id)
+      .then( (user) => {
         user.setPassword(req.body.newPassConfirm, () => {
           user.save();
           req.flash(`success`, `Password changed.`);
           res.redirect(`/users/${user._id}`);
-        });
-      }
-    });
-  } else {
+        }
+        )})
+      .catch((err)=> {
+        mid.errHandler(err, req, res, `back`)
+      });
+    } else {
     req.flash(`error`, `Passwords must match!`);
     res.redirect(`/reset`);
   }
