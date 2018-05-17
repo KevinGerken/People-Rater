@@ -8,7 +8,6 @@ const express = require(`express`),
       flash = require(`connect-flash`),
       methodOverride = require(`method-override`),
       expressSession = require(`express-session`),
-      port = process.env.PORT,
       User = require(`./models/user`),
       humansRoute = require(`./routes/humans`),
       usersRoute = require(`./routes/users`),
@@ -17,7 +16,8 @@ const express = require(`express`),
       moment = require(`moment`),
       compression = require(`compression`);
 
-mongoose.connect(process.env.DATABASEURL);
+mongoose.connect(`mongodb://localhost:27017/help`);
+//mongoose.connect(process.env.DATABASEURL);
 app.set(`view engine`, `ejs`);
 app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -90,4 +90,5 @@ app.use(`/humans`, humansRoute);
 app.use(`/users`, usersRoute);
 app.use(`/humans/:id/comments`, commentsRoute);
 
-app.listen(port, process.env.IP);
+app.listen(3000);
+//app.listen(process.env.PORT, process.env.IP);
